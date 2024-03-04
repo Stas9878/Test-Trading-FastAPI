@@ -22,4 +22,5 @@ async def get_specific_operations(operation_type: str, session: AsyncSession = D
 async def add_specific_operations(new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)):
     query = insert(operation).values(new_operation.model_dump())
     await session.execute(query)
+    await session.commit()
     return {'status': 'success'}

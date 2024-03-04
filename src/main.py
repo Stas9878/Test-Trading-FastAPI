@@ -1,15 +1,10 @@
 import fastapi_users
 from fastapi_users import FastAPIUsers
-from typing import List
-from fastapi.responses import JSONResponse
-from fastapi.exceptions import ValidationException
-from fastapi import Depends, FastAPI, Request
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel, Field
+from fastapi import Depends, FastAPI
 from auth.base_config import auth_backend
 from auth.schemas import UserRead, UserCreate
 from auth.manager import get_user_manager
-from database import User
+from auth.models import User
 from operations.router import router as router_operation
 
 fastapi_users = FastAPIUsers[User, int](
