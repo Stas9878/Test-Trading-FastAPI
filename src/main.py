@@ -1,11 +1,14 @@
 import fastapi_users
 from fastapi_users import FastAPIUsers
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 from auth.base_config import auth_backend
 from auth.schemas import UserRead, UserCreate
-from auth.manager import get_user_manager
 from auth.models import User
+from auth.manager import get_user_manager
 from operations.router import router as router_operation
+from redis import asyncio as aioredis
 
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
@@ -34,10 +37,7 @@ app.include_router(
 
 current_user = fastapi_users.current_user()
 
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.username}"
-
-@app.get("/unprotected-route")
-def unprotected_route():
-    return f"Hello, Anonim"
+@app.on_event("startup")
+async def startup():
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
