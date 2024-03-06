@@ -25,7 +25,7 @@ def get_email_tamplate_dashboard(username: str):
     )
     return email
 
-# @celery.task
+@celery.task
 def send_email_report_dashboard(username: str):
     email = get_email_tamplate_dashboard(username)
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
