@@ -1,5 +1,5 @@
 from sqlalchemy import (TIMESTAMP, Column, 
-                        Integer, MetaData, 
+                        Integer,
                         String, Table)
 from database import metadata
 

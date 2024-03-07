@@ -2,6 +2,7 @@
 /youapi
 Pipfile
 Pipfile.lock
+README.md
 
 # Django #
 *.log
