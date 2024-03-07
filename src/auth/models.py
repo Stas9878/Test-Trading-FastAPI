@@ -5,8 +5,7 @@ from sqlalchemy import (JSON, TIMESTAMP, Boolean, Column, ForeignKey, Integer,
                         MetaData, String, Table)
 
 from database import Base
-
-metadata = MetaData()
+from database import metadata
 
 role = Table(
     "role",
