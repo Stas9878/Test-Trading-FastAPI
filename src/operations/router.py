@@ -8,7 +8,6 @@ from operations.schemas import OperationCreate
 from database import get_async_session
 
 
-
 router = APIRouter(
     prefix='/operations',
     tags=['Operation']
