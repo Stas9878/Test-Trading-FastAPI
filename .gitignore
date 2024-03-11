@@ -3,6 +3,7 @@
 Pipfile
 Pipfile.lock
 README.md
+.env-non-dev
 
 # Django #
 *.log
